@@ -29,14 +29,14 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   KeyRing: !ruby/object:Overrides::Ansible::ResourceOverride
     custom_tests: true
     transport: !ruby/object:Overrides::Ansible::Transport
-      decoder:
+      decoders:
         - 'templates/ansible/decoders/full_name_to_short_name.py'
     delete: |
       module.fail_json(msg="KeyRings cannot be deleted")
   CryptoKey: !ruby/object:Overrides::Ansible::ResourceOverride
     custom_tests: true
     transport: !ruby/object:Overrides::Ansible::Transport
-      decoder:
+      decoders:
         - 'templates/ansible/decoders/full_name_to_short_name.py'
     delete: |
       module.fail_json(msg="KeyRings cannot be deleted")
