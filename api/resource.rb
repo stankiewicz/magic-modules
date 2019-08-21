@@ -261,7 +261,7 @@ module Api
     end
 
     def decoder?
-      !@transport&.decoder.nil?
+      !@transport&.decoders.empty?
     end
 
     # ====================
