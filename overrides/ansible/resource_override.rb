@@ -17,6 +17,8 @@ require 'provider/ansible/facts_override'
 module Overrides
   module Ansible
     # Allows overriding snowflake transport requests
+    # Each one of these takes in a filename.
+    # Each file should contain a single Python function.
     class Transport < Api::Object
       attr_reader :encoder
       attr_reader :decoders
@@ -24,9 +26,25 @@ module Overrides
 
       def validate
         super
-        check :encoder, type: ::String
+        check :encoder, type: ::String, default: []
         check :decoders, type: ::Array, default: []
         check :remove_nones_post_encoder, type: :boolean, default: true
+      end
+
+      def encoders?
+        !@encoders.empty?
+      end
+
+      def decoders?
+        !@decoders.empty?
+      end
+
+      def encoder_functions
+        @encoders.map { |e| compile(e).match(/def ([a-z]*)\(module, response\)/).first }
+      end
+
+      def decoder_functions
+        @decoders.map { |e| compile(e).match(/def ([a-z]*)\(module, response\)/).first }
       end
     end
 
@@ -82,7 +100,7 @@ module Overrides
         check :post_action, type: ::String
         check :provider_helpers, type: ::Array, default: [], item_type: String
         check :return_if_object, type: ::String
-        check :transport, type: Transport
+        check :transport, type: Transport, default: Transport.new
         check :template, type: ::String
         check :update, type: ::String
         check :unwrap_resource, type: :boolean, default: false
