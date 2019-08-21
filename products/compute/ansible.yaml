@@ -200,7 +200,8 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   Instance: !ruby/object:Overrides::Ansible::ResourceOverride
     transport: !ruby/object:Overrides::Ansible::Transport
       encoder: encode_request
-      decoder: decode_response
+      decoder:
+        - decode_response
     hidden:
       - deletion_protection_update
       - shielded_instance_config_update
@@ -228,7 +229,8 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   InstanceTemplate: !ruby/object:Overrides::Ansible::ResourceOverride
     transport: !ruby/object:Overrides::Ansible::Transport
       encoder: encode_request
-      decoder: decode_response
+      decoder:
+        - decode_response
     provider_helpers:
       - 'products/compute/helpers/python/provider_instance_template.py'
       - 'products/compute/helpers/python/instance_metadata.py'
@@ -255,7 +257,8 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   TargetPool: !ruby/object:Overrides::Ansible::ResourceOverride
     transport: !ruby/object:Overrides::Ansible::Transport
       encoder: encode_request
-      decoder: decode_response
+      decoder: 
+        - decode_response
     provider_helpers:
       - 'products/compute/helpers/python/provider_target_pool.py'
   TargetVpnGateway: !ruby/object:Overrides::Ansible::ResourceOverride

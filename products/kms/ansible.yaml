@@ -29,7 +29,8 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   KeyRing: !ruby/object:Overrides::Ansible::ResourceOverride
     custom_tests: true
     transport: !ruby/object:Overrides::Ansible::Transport
-      decoder: decode_response
+      decoder:
+        - decode_response
     provider_helpers:
       - products/kms/helpers/python/provider_key_ring.py
     delete: |
@@ -37,7 +38,8 @@ overrides: !ruby/object:Overrides::ResourceOverrides
   CryptoKey: !ruby/object:Overrides::Ansible::ResourceOverride
     custom_tests: true
     transport: !ruby/object:Overrides::Ansible::Transport
-      decoder: decode_response
+      decoder:
+        - decode_response
     provider_helpers:
       - products/kms/helpers/python/provider_key_ring.py
     delete: |
