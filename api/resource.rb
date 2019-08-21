@@ -256,14 +256,6 @@ module Api
       !@kind.nil?
     end
 
-    def encoder?
-      !@transport&.encoder.nil?
-    end
-
-    def decoder?
-      !@transport&.decoders.empty?
-    end
-
     # ====================
     # Version-related methods
     # ====================
